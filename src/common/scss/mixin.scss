@@ -1,0 +1,55 @@
+$ratio: 375 / 10;
+$true:true;
+$false:false;
+
+@function px2rem($px) {
+  @return $px / $ratio + rem;
+}
+
+@mixin ellipsis2($line,$flag:true) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line;
+  @if $flag {
+    word-break: keep-all;
+  }@else{
+    word-break:normal;
+  }
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+}
+
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+// 背景图片
+@mixin bg-image($url) {
+  background-image: url($url+"@2x.png");
+  @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
+    background-image: url($url+"@3x.png");
+  }
+}
+
+// 不换行
+@mixin no-wrap() {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+// 扩展点击区域
+@mixin extend-click() {
+  position: relative;
+  &:before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+  }
+}
